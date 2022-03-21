@@ -35,6 +35,10 @@ jobs:
       with:
         from: commits
       id: issue
+    - name: Output 1
+      run: echo 'Issue Output2 - ' ${{ steps.issue }}
+    - name: Output 2
+      run: echo 'Issue Output - ' ${{ steps.issue.issue }}
     - name: Jira Issue Transition
       uses: atlassian/gajira-transition@v2.0.2
       with:
@@ -44,8 +48,5 @@ jobs:
         transition: 'In Progress'
         # The id of a transition to apply to the issue
         transitionId: # optional
-    - name: Output 1
-      run: echo 'Issue Output2 - ' ${{ steps.issue }}
-    - name: Output 2
-      run: echo 'Issue Output - ' ${{ steps.issue.issue }}
+
 
