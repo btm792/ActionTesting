@@ -3,6 +3,16 @@ on:
   push
 
 jobs:
+  test-secrets:
+    runs-on: ubuntu-latest
+    env:
+      secret_thingy: ${{ secrets.JIRA_BASE_URL }}
+    steps:
+      - if: ${{ env.secret_thingy != '' }}
+        run: echo 'The thingy has a value of ' ${{env.secret_thingy}}
+      - if: ${{ env.secret_thingy == '' }}
+        run: echo 'The thingy has no value!!'
+  
   build:
     runs-on: ubuntu-latest
     steps:
