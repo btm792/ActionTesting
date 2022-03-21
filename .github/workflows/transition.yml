@@ -38,7 +38,7 @@ jobs:
     - name: Output 1
       run: echo 'Issue Output2 - ' ${{ steps.issue }}
     - name: Output 2
-      run: echo 'Issue Output - ' ${{ steps.issue.outputs.* }}
+      run: echo 'Issue Output - ' ${{ join(steps.issue.outputs.*, '\n') }}
     - name: Jira Issue Transition
       uses: atlassian/gajira-transition@v2.0.2
       with:
