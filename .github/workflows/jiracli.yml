@@ -1,7 +1,0 @@
-- name: Setup Jira
-  # You may pin to the exact commit or the version.
-  # uses: atlassian/gajira-cli@d64bb926ec760b52c8cf4085cf61d26631862648
-  uses: atlassian/gajira-cli@v2.0.2
-  with:
-    # Version of the CLI to use
-    version: # optional, default is 1.0.20
