@@ -11,7 +11,7 @@ jobs:
       - if: ${{ env.secret_thingy != '' }}
         run: echo 'The thingy has a value of ' ${{env.secret_thingy}}
       - if: ${{ env.secret_thingy == '' }}
-        run: echo 'The thingy has no value!!!'
+        run: echo 'The thingy has no value!!'
   
   build:
     runs-on: ubuntu-latest
