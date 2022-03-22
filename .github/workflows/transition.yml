@@ -39,7 +39,7 @@ jobs:
       run: echo 'Issue Output2 - ' ${{ join(steps.commit_key.outputs.*, '\n') }}
 
     - name: Output 2
-      run: echo 'Issue Output - ' ${{ join(steps.branch_key.outputs.*, '\n') }}
+      run: echo 'Name - ' ${{ github.event.repository.name }}
 
     - name: Jira Commit Issue Transition
       uses: atlassian/gajira-transition@v2.0.2
