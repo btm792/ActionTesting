@@ -60,6 +60,21 @@ jobs:
         transition: 'In Progress'
         # The id of a transition to apply to the issue
         transitionId: # optional
+  slackNotification:
+    name: Slack Notification
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
 
     - name: Job Status
       run: echo 'Job Status - ' ${{ job.status }}
+    
+    - name: Slack Notification
+      uses: rtCamp/action-slack-notify@v2
+      env:
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        SLACK_USERNAME: deploymentBot
+        SLACK_COLOR: ${{ job.status }}
+        SLACK_TITLE: Deployment Notification
+
+
