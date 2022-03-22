@@ -35,6 +35,11 @@ jobs:
         from: branch
       id: branch_key
 
+    - name: Output 1
+      run: echo 'Issue Output2 - ' ${{ join(steps.commit_key.outputs.*, '\n') }}
+    - name: Output 2
+      run: echo 'Issue Output - ' ${{ join(steps.branch_key.outputs.*, '\n') }}
+
     - name: Jira Commit Issue Transition
       uses: atlassian/gajira-transition@v2.0.2
       with:
@@ -49,7 +54,7 @@ jobs:
       uses: atlassian/gajira-transition@v2.0.2
       with:
         # Key of the issue to be transitioned
-        issue: ${{ join(steps.branch.outputs.*, '\n') }}
+        issue: ${{ join(steps.branch_key.outputs.*, '\n') }}
         # The transition to apply to the issue, e.g. 'In Progress'
         transition: 'In Progress'
         # The id of a transition to apply to the issue
