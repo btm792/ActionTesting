@@ -22,31 +22,36 @@ jobs:
         JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
         JIRA_BASE_URL:  ${{ secrets.JIRA_BASE_URL }}
         JIRA_USER_EMAIL: ${{ secrets.JIRA_USER_EMAIL }}
-    #- name: Jira TODO
-    #  uses: atlassian/gajira-todo@master
-    #  with:
-    #    project: AT
-    #    issuetype: Task
-    #    description: Created automatically via Github Actions
-    #  env:
-    #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    - name: Find Issue Key
+
+    - name: Find Commit Issue Key
       uses: atlassian/gajira-find-issue-key@master
       with:
         from: commits
-      id: issue
-    - name: Output 1
-      run: echo 'Issue Output2 - ' ${{ steps.issue }}
-    - name: Output 2
-      run: echo 'Issue Output - ' ${{ join(steps.issue.outputs.*, '\n') }}
-    - name: Jira Issue Transition
+      id: commit_key
+
+    - name: Find Branch Issue Key
+      uses: atlassian/gajira-find-issue-key@master
+      with:
+        from: branch
+      id: branch_key
+
+    - name: Jira Commit Issue Transition
       uses: atlassian/gajira-transition@v2.0.2
       with:
         # Key of the issue to be transitioned
-        issue: ${{ join(steps.issue.outputs.*, '\n') }}
+        issue: ${{ join(steps.commit_key.outputs.*, '\n') }}
         # The transition to apply to the issue, e.g. 'In Progress'
         transition: 'In Progress'
         # The id of a transition to apply to the issue
         transitionId: # optional
 
+    - name: Jira Branch Issue Transition
+      uses: atlassian/gajira-transition@v2.0.2
+      with:
+        # Key of the issue to be transitioned
+        issue: ${{ join(steps.branch.outputs.*, '\n') }}
+        # The transition to apply to the issue, e.g. 'In Progress'
+        transition: 'In Progress'
+        # The id of a transition to apply to the issue
+        transitionId: # optional
 
