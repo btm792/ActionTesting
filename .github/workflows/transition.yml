@@ -37,6 +37,7 @@ jobs:
 
     - name: Output 1
       run: echo 'Issue Output2 - ' ${{ join(steps.commit_key.outputs.*, '\n') }}
+
     - name: Output 2
       run: echo 'Issue Output - ' ${{ join(steps.branch_key.outputs.*, '\n') }}
 
@@ -60,3 +61,5 @@ jobs:
         # The id of a transition to apply to the issue
         transitionId: # optional
 
+    - name: Job Status
+      run: echo 'Job Status - ' ${{ job.status }}
